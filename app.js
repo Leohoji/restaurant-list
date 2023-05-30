@@ -4,7 +4,7 @@ const app = express()
 const mongoose = require('mongoose') // Include Mongoose to connect MongoDB
 const exphbs = require('express-handlebars') // Include Express-handlebars to use template engine
 const port = 3000 // Set server variable
-const restaurants = require('./restaurant.json').results // Introduce the restaurants information
+const Restaurants = require('./models/restaurant') // Introduce the restaurants Schema I created before
 
 // Use dotenv on informal environment
 if (process.env.NODE_ENV !== 'production') {
@@ -40,9 +40,11 @@ app.use(express.static('public'))
 
 // Set root route
 app.get('/', (req, res) => {
-
-  // Render each restaurant information => { restaurants: restaurants }
-  res.render(`index`, { restaurants })
+  // Find the data and render them to the home web
+  Restaurants.find()
+    .lean()
+    .then(restaurants => res.render(`index`, { restaurants })) // Render each restaurant information => { restaurants: restaurants }
+    .catch(error => console.error(error))
 })
 
 // Set show route
