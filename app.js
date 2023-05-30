@@ -1,15 +1,31 @@
 // Include Express module to set a server in this project
 const express = require('express')
 const app = express()
+const mongoose = require('mongoose') // Include Mongoose to connect MongoDB
+const exphbs = require('express-handlebars') // Include Express-handlebars to use template engine
+const port = 3000 // Set server variable
+const restaurants = require('./restaurant.json').results // Introduce the restaurants information
 
-// Include Express-handlebars to use template engine
-const exphbs = require('express-handlebars')
+// Use dotenv on informal environment
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
-// Set server variable
-const port = 3000
+// Connect to MongoDB database
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
-// Introduce the restaurants information
-const restaurants = require('./restaurant.json').results
+// Get the connection after connect to the database
+const db = mongoose.connection
+
+// Connect error
+db.on('error', () => {
+  console.log('mongodb error')
+})
+
+// Connect successfully
+db.once('open', () => {
+  console.log('mongodb connected!')
+})
 
 /* 
 Set template engine:
