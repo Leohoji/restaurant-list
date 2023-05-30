@@ -24,4 +24,4 @@ const RestaurantSchema = new Schema({
   rating: Number,
   description: String
 })
-module.exports = mongoose.model('Restaurant', todoSchema)
+module.exports = mongoose.model('Restaurant', RestaurantSchema)
