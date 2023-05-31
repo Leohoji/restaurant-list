@@ -3,7 +3,6 @@ const mongoose = require('mongoose') // Include Mongoose module to set schema
 const Schema = mongoose.Schema // Create Schema variable
 /* 
 Create Schema constructor, my data structure following:
-"id": id,
 "name": name,
 "category": category,
 "image": image,
@@ -14,7 +13,6 @@ Create Schema constructor, my data structure following:
 "description": description
 */
 const RestaurantSchema = new Schema({
-  id: Number,
   name: String,
   category: String,
   image: String,

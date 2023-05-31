@@ -1,15 +1,18 @@
 // Include Express module to set a server in this project
 const express = require('express')
-const app = express()
 const mongoose = require('mongoose') // Include Mongoose to connect MongoDB
 const exphbs = require('express-handlebars') // Include Express-handlebars to use template engine
 const port = 3000 // Set server variable
 const Restaurants = require('./models/restaurant') // Introduce the restaurants Schema I created before
+const bodyParser = require('body-parser') // Include the body parser to parse req body
 
 // Use dotenv on informal environment
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
+
+// Use Express model
+const app = express()
 
 // Connect to MongoDB database
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -17,35 +20,56 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 // Get the connection after connect to the database
 const db = mongoose.connection
 
-// Connect error
+// Connect error and connect successfully
 db.on('error', () => {
   console.log('mongodb error')
 })
-
-// Connect successfully
 db.once('open', () => {
   console.log('mongodb connected!')
 })
 
-/* 
-Set template engine:
-1. Name the engine, and let the 'main' file to be as the default layout
-2. Set the 'view engine' is 'handlebars'
-*/
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
-app.set('view engine', 'handlebars')
+// Set template engine:
+app.engine('handlebars', exphbs({ defaultLayout: 'main' })) // Name the engine, and let 'main' file as default layout
+app.set('view engine', 'handlebars') // Set 'view engine' is 'handlebars'
+app.use(express.static('public')) // Tell Express use static files from './public/'
+app.use(bodyParser.urlencoded({ extended: true })) // Regulate each request to be prepared by body-parser
 
-// Tell Express use static files from './public/'
-app.use(express.static('public'))
 
-// Set root route
+//------------------- Set root route ---------------------------------
 app.get('/', (req, res) => {
   // Find the data and render them to the home web
   Restaurants.find()
     .lean()
-    .then(restaurants => res.render(`index`, { restaurants })) // Render each restaurant information => { restaurants: restaurants }
+    // Render each restaurant information => { restaurants: restaurants }
+    .then(restaurants => res.render(`index`, { restaurants }))
     .catch(error => console.error(error))
 })
+
+//--------- Set "create" route to realize the "C" in CRUD ------------
+app.get('/restaurant/new', (req, res) => {
+  return res.render('new')
+})
+
+// Set create "POST" route
+app.post('/restaurant', (req, res) => {
+  const data = req.body
+  return Restaurants.create([{
+    name: data.name,
+    category: data.category,
+    image: data.image,
+    location: data.location,
+    phone: data.phone,
+    google_map: data.google_map,
+    rating: data.rating,
+    description: data.description
+  }])
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
+
+
+
 
 // Set show route
 app.get('/restaurants/:restaurant_id', (req, res) => {

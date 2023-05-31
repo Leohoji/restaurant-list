@@ -23,7 +23,6 @@ db.once('open', () => {
   // Create the data
   for (let restaurant of restaurants) {
     Restaurant.create({
-      id: restaurant.id,
       name: restaurant.name,
       category: restaurant.category,
       image: restaurant.image,

@@ -1,0 +1,61 @@
+{{!--
+Create Schema constructor, my data structure following:
+"name": name,
+"category": category,
+"image": image,
+"location": location,
+"phone": phone,
+"google_map": map,
+"rating": rating,
+"description": description --}}
+
+<form action="/restaurant" method="POST"
+  class="container shadow p-3 mt-3 mb-5 bg-light rounded-3 w-50 border needs-validation">
+  <div class="row">
+    <div class="m-3 col">
+      <label for="name" class="form-label">Restaurant name</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="Enter the restaurant name..." required>
+    </div>
+
+    <div class="m-3 col">
+      <label for="category" class="form-label">Category</label>
+      <input type="text" class="form-control" id="category" name="category" placeholder="What's the category..."
+        required>
+    </div>
+  </div>
+
+  <div class="m-3">
+    <label for="image" class="form-label">Image</label>
+    <input type="text" class="form-control" id="image" name="image" placeholder="Enter the address...">
+  </div>
+
+  <div class="m-3">
+    <label for="location" class="form-label">Location</label>
+    <input type="text" class="form-control" id="location" name="location" placeholder="Enter the location..." required>
+  </div>
+
+  <div class="m-3">
+    <label for="google_map" class="form-label">Google_map</label>
+    <input type="text" class="form-control" id="google_map" name="google_map" placeholder="Enter the map address...">
+  </div>
+
+  <div class="row">
+    <div class="m-3 col">
+      <label for="rating" class="form-label">Rating</label>
+      <input type="number" class="form-control" id="rating" name="rating" min="0" step="0.1" required>
+    </div>
+    <div class="m-3 col">
+      <label for="phone" class="form-label">Phone</label>
+      <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter the phone number..." required>
+    </div>
+  </div>
+
+  <div class="m-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea class="form-control" id="description" name="description" placeholder="Add some description..."></textarea>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-secondary" type="submit">Create</button>
+  </div>
+</form>
