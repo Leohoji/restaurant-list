@@ -43,24 +43,35 @@
       <div class="row row-cols-sm-3">
         <!-- Introduce each restaurant information in loops -->
         {{#each restaurants}}
-        <a href="/restaurants/{{ this.id }}" class="text-secondary">
-          <div class="card mb-3">
-            <img class="card-img-top" src="{{ this.image }}" alt="{{ this.name }}">
-            <div class="card-body p-3">
-              <h6 class="card-title mb-1">{{ this.name }}</h6>
+        <div class="every-card">
+          <a href="/restaurant/{{ this._id }}" class="text-secondary" style="">
+            <div class="card mb-3">
+              <img class="card-img-top" src="{{ this.image }}" alt="{{ this.name }}">
+              <div class="card-body p-3">
+                <h6 class="card-title mb-1">{{ this.name }}</h6>
 
-              <div class="restaurant-category mb-1">
-                <i class="fas fa-utensils pr-2"></i> {{ this.category }}
+                <div class="restaurant-category mb-1">
+                  <i class="fas fa-utensils pr-2"></i> {{ this.category }}
+                </div>
+                <div class="card-change d-flex justify-content-between">
+                  <span class="badge rounded-pill bg-danger font-weight-normal">
+                    {{ this.rating }}
+                    <i class="fas fa-star fa-xs"></i>
+                  </span>
+                  <div class="edit-detail-delete" style="display: inline;">
+                    <a href="/restaurant/{{ this._id }}/edit" class="p-1"><i class="fa-regular fa-pen-to-square fa-xl"
+                        style="color: #087ce7;"></i></a>
+                    <a href="/restaurant/{{ this._id }}" class="p-1"><i class="fa-solid fa-file-lines fa-xl"
+                        style="color: #0dbce7"></i></a>
+                    <form action="/restaurant/{{ this._id }}/delete" method="POST" class="p-1" style="display: inline">
+                      <button type="submit"><i class="fa-solid fa-trash"></i></button>
+                    </form>
+                  </div>
+                </div>
               </div>
-
-              <span class="badge rounded-pill bg-danger font-weight-normal">
-                {{ this.rating }}
-                <i class="fas fa-star fa-xs"></i>
-              </span>
-
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
         {{/each}}
       </div>
     </div>

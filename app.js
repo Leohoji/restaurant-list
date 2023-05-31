@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars') // Include Express-handlebars to us
 const port = 3000 // Set server variable
 const Restaurants = require('./models/restaurant') // Introduce the restaurants Schema I created before
 const bodyParser = require('body-parser') // Include the body parser to parse req body
+const restaurant = require('./models/restaurant')
 
 // Use dotenv on informal environment
 if (process.env.NODE_ENV !== 'production') {
@@ -68,18 +69,15 @@ app.post('/restaurant', (req, res) => {
 })
 
 
-
-
-
-// Set show route
-app.get('/restaurants/:restaurant_id', (req, res) => {
-
-  // Find the restaurant information user clicked
-  const restaurant = restaurants.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-
-  // Render the restaurant information user clicked => { restaurant: restaurant }
-  res.render('show', { restaurant })
+//--------- Set "show" route to realize the "R" in CRUD ------------
+app.get('/restaurant/:restaurant_id', (req, res) => {
+  const id = req.params.restaurant_id //get id from MongoDB database
+  Restaurants.findById(id)
+    .lean()
+    .then((restaurant) => res.render('show', { restaurant }))
+    .catch((error) => console.log(error))
 })
+
 
 // Set search route
 app.get('/search', (req, res) => {
