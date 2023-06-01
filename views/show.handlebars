@@ -57,9 +57,12 @@
       </div>
 
       <div class="edit-detail-delete" style="display: inline">
+        <!-- Edit -->
         <a href="/restaurant/{{ restaurant._id }}/edit" class="p-1"><i class="fa-regular fa-pen-to-square fa-xl"
             style="color: #087ce7;"></i></a>
+        <!-- Back -->
         <a href="/" class="p-1"><i class="fa-solid fa-arrow-left fa-xl"></i></a>
+        <!-- Delete -->
         <form action="/restaurant/{{ restaurant._id }}/delete" method="POST" class="p-1" style="display: inline">
           <button type="submit"><i class="fa-solid fa-trash"></i></button>
         </form>

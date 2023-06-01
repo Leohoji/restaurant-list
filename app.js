@@ -5,7 +5,6 @@ const exphbs = require('express-handlebars') // Include Express-handlebars to us
 const port = 3000 // Set server variable
 const Restaurants = require('./models/restaurant') // Introduce the restaurants Schema I created before
 const bodyParser = require('body-parser') // Include the body parser to parse req body
-const restaurant = require('./models/restaurant')
 
 // Use dotenv on informal environment
 if (process.env.NODE_ENV !== 'production') {
@@ -16,7 +15,7 @@ if (process.env.NODE_ENV !== 'production') {
 const app = express()
 
 // Connect to MongoDB database
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 
 // Get the connection after connect to the database
 const db = mongoose.connection
@@ -39,8 +38,8 @@ app.use(bodyParser.urlencoded({ extended: true })) // Regulate each request to b
 //------------------- Set root route ---------------------------------
 app.get('/', (req, res) => {
   // Find the data and render them to the home web
-  Restaurants.find()
-    .lean()
+  return Restaurants.find()
+    .lean() // clean the data gotten from MongoDB
     // Render each restaurant information => { restaurants: restaurants }
     .then(restaurants => res.render(`index`, { restaurants }))
     .catch(error => console.error(error))
@@ -53,7 +52,7 @@ app.get('/restaurant/new', (req, res) => {
 
 // Set create "POST" route
 app.post('/restaurant', (req, res) => {
-  const data = req.body
+  const data = req.body //get post info from req.body
   return Restaurants.create([{
     name: data.name,
     category: data.category,
@@ -72,11 +71,39 @@ app.post('/restaurant', (req, res) => {
 //--------- Set "show" route to realize the "R" in CRUD ------------
 app.get('/restaurant/:restaurant_id', (req, res) => {
   const id = req.params.restaurant_id //get id from MongoDB database
-  Restaurants.findById(id)
+  return Restaurants.findById(id)
     .lean()
     .then((restaurant) => res.render('show', { restaurant }))
     .catch((error) => console.log(error))
 })
+
+
+//--------- Set "edit" route to realize the "U" in CRUD ------------
+app.get('/restaurant/:restaurant_id/edit', (req, res) => {
+  const id = req.params.restaurant_id
+  return Restaurants.findById(id)
+    .lean()
+    .then((restaurant) => res.render('edit', { restaurant }))
+    .catch((error) => console.log(error))
+})
+
+app.post('/restaurant/:restaurant_id/edit', (req, res) => {
+  const id = req.params.restaurant_id
+  const restaurantEdited = req.body
+
+  if (mongoose.Types.ObjectId.isValid(id)) {
+    console.log('Valid!')
+    // Use "findByIdAndUpdate" to update the MongoDB database by Mongoose, "new" parameter can return the data revised.
+    return Restaurants.findByIdAndUpdate(id, restaurantEdited, { new: true })
+      .then((data) => {
+        console.log(data) // return the data I revised
+        res.redirect(`/restaurant/${id}`) //redirect to the "detail" page
+      })
+      .catch((error) => console.log(error))
+  }
+})
+
+
 
 
 // Set search route

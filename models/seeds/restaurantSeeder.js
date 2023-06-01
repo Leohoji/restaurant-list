@@ -22,16 +22,7 @@ db.once('open', () => {
 
   // Create the data
   for (let restaurant of restaurants) {
-    Restaurant.create({
-      name: restaurant.name,
-      category: restaurant.category,
-      image: restaurant.image,
-      location: restaurant.location,
-      phone: restaurant.phone,
-      google_map: restaurant.google_map,
-      rating: restaurant.rating,
-      description: restaurant.description
-    })
+    Restaurant.create(restaurants)
   }
   console.log('All the data have been inserted into the MongoDB!')
 })
