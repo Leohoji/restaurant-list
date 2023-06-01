@@ -92,7 +92,6 @@ app.post('/restaurant/:restaurant_id/edit', (req, res) => {
   const restaurantEdited = req.body
 
   if (mongoose.Types.ObjectId.isValid(id)) {
-    console.log('Valid!')
     // Use "findByIdAndUpdate" to update the MongoDB database by Mongoose, "new" parameter can return the data revised.
     return Restaurants.findByIdAndUpdate(id, restaurantEdited, { new: true })
       .then((data) => {
@@ -104,6 +103,14 @@ app.post('/restaurant/:restaurant_id/edit', (req, res) => {
 })
 
 
+//--------- Set "delete" route to realize the "D" in CRUD ------------
+app.post('/restaurant/:restaurant_id/delete', (req, res) => {
+  const id = req.params.restaurant_id
+  return Restaurants.findById(id)
+    .then((restaurant) => restaurant.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
 
 
 // Set search route
