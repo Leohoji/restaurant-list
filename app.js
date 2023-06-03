@@ -7,27 +7,11 @@ const bodyParser = require('body-parser') // Include the body parser to parse re
 const methodOverride = require('method-override') // Include method-override to override "PUT" and "DELETE" route
 const routes = require('./routes') // Introduce routes
 
-// Use dotenv on informal environment
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
-
 // Use Express model
 const app = express()
 
 // Connect to MongoDB database
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
-
-// Get the connection after connect to the database
-const db = mongoose.connection
-
-// Connect error and connect successfully
-db.on('error', () => {
-  console.log('mongodb error')
-})
-db.once('open', () => {
-  console.log('mongodb connected!')
-})
+require('./config/mongoose')
 
 // Set template engine:
 app.engine('handlebars', exphbs({ defaultLayout: 'main' })) // Name the engine, and let 'main' file as default layout
