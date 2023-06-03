@@ -22,7 +22,7 @@ db.once('open', () => {
 
   // Create the data
   for (let restaurant of restaurants) {
-    Restaurant.create(restaurants)
+    Restaurant.create(restaurant)
   }
   console.log('All the data have been inserted into the MongoDB!')
 })
