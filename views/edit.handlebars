@@ -1,6 +1,6 @@
 {{!-- Here is a "edit" page --}}
 
-<form action="/restaurant/{{restaurant._id}}/edit" method="POST"
+<form action="/restaurant/{{restaurant._id}}?_method=PUT" method="POST"
   class="container shadow p-3 mt-3 mb-5 bg-light rounded-3 w-50 border needs-validation">
   <div class="row">
     <div class="m-3 col">
@@ -10,16 +10,22 @@
     </div>
 
     <div class="m-3 col">
-      <label for="category" class="form-label">Category</label>
-      <input type="text" class="form-control" id="category" name="category" placeholder="What's the category..."
-        value="{{ restaurant.category }}" required>
+      <label for="Name_en" class="form-label">Name_en</label>
+      <input type="text" class="form-control" id="Name_en" name="Name_en" placeholder="What's the English name..."
+        value="{{ restaurant.name_en }}" required>
     </div>
+  </div>
+
+  <div class="m-3 col">
+    <label for="category" class="form-label">Category</label>
+    <input type="text" class="form-control" id="category" name="category" placeholder="What's the category..."
+      value="{{ restaurant.category }}" required>
   </div>
 
   <div class="m-3">
     <label for="image" class="form-label">Image</label>
     <input type="text" class="form-control" id="image" name="image" placeholder="Enter the address..."
-      value="{{ restaurant.image }}">
+      value="{{ restaurant.image }}" required>
   </div>
 
   <div class="m-3">
@@ -31,7 +37,7 @@
   <div class="m-3">
     <label for="google_map" class="form-label">Google_map</label>
     <input type="text" class="form-control" id="google_map" name="google_map" placeholder="Enter the map address..."
-      value="{{ restaurant.google_map }}">
+      value="{{ restaurant.google_map }}" required>
   </div>
 
   <div class="row">
@@ -49,8 +55,8 @@
 
   <div class="m-3">
     <label for="description" class="form-label">Description</label>
-    <textarea class="form-control" id="description" name="description"
-      placeholder="Add some description...">{{ restaurant.description }}</textarea>
+    <textarea class="form-control" id="description" name="description" placeholder="Add some description..."
+      required>{{ restaurant.description }}</textarea>
   </div>
 
   <div class="d-flex justify-content-end">

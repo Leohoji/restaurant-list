@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars') // Include Express-handlebars to us
 const port = 3000 // Set server variable
 const Restaurants = require('./models/restaurant') // Introduce the restaurants Schema I created before
 const bodyParser = require('body-parser') // Include the body parser to parse req body
+const methodOverride = require('method-override') // Include method-override to override "PUT" and "DELETE" route
 
 // Use dotenv on informal environment
 if (process.env.NODE_ENV !== 'production') {
@@ -33,7 +34,7 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' })) // Name the engine, 
 app.set('view engine', 'handlebars') // Set 'view engine' is 'handlebars'
 app.use(express.static('public')) // Tell Express use static files from './public/'
 app.use(bodyParser.urlencoded({ extended: true })) // Regulate each request to be prepared by body-parser
-
+app.use(methodOverride('_method')) // Each request will be prepared by method-override
 
 //------------------- Set root route ---------------------------------
 app.get('/', (req, res) => {
@@ -55,6 +56,7 @@ app.post('/restaurant', (req, res) => {
   const data = req.body //get post info from req.body
   return Restaurants.create([{
     name: data.name,
+    name_en: data.name_en,
     category: data.category,
     image: data.image,
     location: data.location,
@@ -87,7 +89,7 @@ app.get('/restaurant/:restaurant_id/edit', (req, res) => {
     .catch((error) => console.log(error))
 })
 
-app.post('/restaurant/:restaurant_id/edit', (req, res) => {
+app.put('/restaurant/:restaurant_id', (req, res) => {
   const id = req.params.restaurant_id
   const restaurantEdited = req.body
 
@@ -104,7 +106,7 @@ app.post('/restaurant/:restaurant_id/edit', (req, res) => {
 
 
 //--------- Set "delete" route to realize the "D" in CRUD ------------
-app.post('/restaurant/:restaurant_id/delete', (req, res) => {
+app.delete('/restaurant/:restaurant_id', (req, res) => {
   const id = req.params.restaurant_id
   return Restaurants.findById(id)
     .then((restaurant) => restaurant.remove())

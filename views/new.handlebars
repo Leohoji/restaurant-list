@@ -18,15 +18,20 @@ Create Schema constructor, my data structure following:
     </div>
 
     <div class="m-3 col">
-      <label for="category" class="form-label">Category</label>
-      <input type="text" class="form-control" id="category" name="category" placeholder="What's the category..."
+      <label for="Name_en" class="form-label">Name_en</label>
+      <input type="text" class="form-control" id="Name_en" name="name_en" placeholder="What's the English name..."
         required>
     </div>
   </div>
 
+  <div class="m-3 col">
+    <label for="category" class="form-label">Category</label>
+    <input type="text" class="form-control" id="category" name="category" placeholder="What's the category..." required>
+  </div>
+
   <div class="m-3">
     <label for="image" class="form-label">Image</label>
-    <input type="text" class="form-control" id="image" name="image" placeholder="Enter the address...">
+    <input type="text" class="form-control" id="image" name="image" placeholder="Enter the address..." required>
   </div>
 
   <div class="m-3">
@@ -36,7 +41,8 @@ Create Schema constructor, my data structure following:
 
   <div class="m-3">
     <label for="google_map" class="form-label">Google_map</label>
-    <input type="text" class="form-control" id="google_map" name="google_map" placeholder="Enter the map address...">
+    <input type="text" class="form-control" id="google_map" name="google_map" placeholder="Enter the map address..."
+      required>
   </div>
 
   <div class="row">
@@ -52,7 +58,8 @@ Create Schema constructor, my data structure following:
 
   <div class="m-3">
     <label for="description" class="form-label">Description</label>
-    <textarea class="form-control" id="description" name="description" placeholder="Add some description..."></textarea>
+    <textarea class="form-control" id="description" name="description" placeholder="Add some description..."
+      required></textarea>
   </div>
 
   <div class="d-flex justify-content-end">
