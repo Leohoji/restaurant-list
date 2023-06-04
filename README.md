@@ -22,24 +22,38 @@ This is a user's favorite restaurant list project built on Node.js and Express.j
 5. **Search**
 * You can input the keyword with name or category on search bar to find the matched restaurant(s).
 
+6. **Sort**
+* You can sort the restaurants by selecting dropdown menu with "A to Z", "Z to A", "種類", amd "地區".
+
 # Installation
+
+1. Clone the repository
 ```
-// Clone the repository
-git clone https://github.com/Leohoji/restaurant-list.git 
+git clone https://github.com/Leohoji/restaurant-list.git
+```
 
-// Go into the project
+2. Go into the project
+```
 cd restaurant-list
+```
 
-// Install the dependencies
+3. Install the dependencies
+```
 npm install
+```
 
-// Run the seed to introduce the seeders
+4. Run the seed to introduce the seeders
+```
 npm run seed
+```
 
-// Start the server
+5. Start the server
+```
 npm run dev
+```
 
-// Copy the address on your website
+6. Copy the address on your website
+```
 This project is running on http://localhost:3000
 ```
 
@@ -52,7 +66,8 @@ This project is running on http://localhost:3000
 * dotenv: 16.0.3
 * bootstrap 5.1.3
 * font-awesome 5.8.1
+* method-override 3.0.0
 
 # Contributor
 <br>
-*Lo* *Ho*
+Lo Ho
