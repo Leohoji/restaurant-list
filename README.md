@@ -1,7 +1,7 @@
 # Restaurant Foodie Website
 This is a user's favorite restaurant list project built on Node.js and Express.js, you can browse all the restaurants user's preference.
 
-![image](https://github.com/Leohoji/restaurant-list/blob/main/pictures/%E9%A4%90%E5%BB%B3%E6%B8%85%E5%96%AE-CRUD.jpg)
+![image](https://github.com/Leohoji/restaurant-list/blob/main/pictures/%E9%A4%90%E5%BB%B3%E6%B8%85%E5%96%AE-refactor.jpg)
 
 # Features
 <br>
