@@ -7,6 +7,9 @@
           width="30" height="30" class="d-inline-block align-top" alt="我的餐廳清單">
         我的餐廳清單
       </a>
+      <!-- Create a new restaurant-->
+      <a class='text-danger' href="/restaurant/new" style="text-decoration:none"><i class="fa-solid fa-plus"></i>
+        新增餐廳</a>
     </div>
   </nav>
 
@@ -16,22 +19,36 @@
 <!-- search bar -->
 <div class="container search-bar">
   <div class="search-bar-outer">
-    <div class="search-bar-inner">
+    <div class="search-bar-inner d-flex justify-content-between">
       <form action="/search">
-        <div class="search-title d-flex justify-content-between">
-          <h4 class="mb-2" style="display:inline">尋找餐廳：</h4>
-          <!-- Create a new restaurant-->
-          <a class='text-danger' href="/restaurant/new" style="text-decoration:none"><i class="fa-solid fa-plus"></i>
-            新增餐廳</a>
+        <div class="search-title">
+          <h4 class="mb-2">尋找餐廳：</h4>
         </div>
-        <div class="input-group">
-          <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
-            value="{{ keyword }}" aria-describedby="search-button">
+        <div class="input-group" style="width: 300px">
+          <input type="text" name="keyword" class="form-control me-1" placeholder="輸入餐廳、分類"
+            aria-label="Restaurant Name..." value="{{ keyword }}" aria-describedby="search-button">
           <div class="input-group-append">
-            <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+            <button class="btn btn-major bg-danger me-2" type="submit" id="search-button"><i
+                class="fas fa-search"></i></button>
           </div>
         </div>
       </form>
+
+      <!-- Dropdown Select -->
+      <div class="dropdown w-50" style="display: inline-block; margin-top: 35px">
+        <button class="btn btn-light w-100 d-flex justify-content-between" type="button" id="dropdownMenuButton1"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          <div class="sort-button">{{#if button}}{{ button }}{{else}}Sort{{/if}}</div><i
+            class="fa-solid fa-arrow-down-wide-short fa-lg" style="margin-top: 13px"></i>
+        </button>
+        <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
+          <a class="dropdown-item" href="/sort/asc">A to Z</a>
+          <a class="dropdown-item" href="/sort/desc">Z to A</a>
+          <a class="dropdown-item" href="/sort/category">種類</a>
+          <a class="dropdown-item" href="/sort/location">地區</a>
+        </ul>
+      </div>
+
     </div>
   </div>
 </div>
@@ -66,7 +83,8 @@
                     <a href="/restaurant/{{ this._id }}" class="p-1"><i class="fa-solid fa-file-lines fa-xl"
                         style="color: #0dbce7"></i></a>
                     {{!-- Delete --}}
-                    <form action="/restaurant/{{ this._id }}?_method=DELETE" method="POST" class="p-1" style="display: inline">
+                    <form action="/restaurant/{{ this._id }}?_method=DELETE" method="POST" class="p-1"
+                      style="display: inline">
                       <button type="submit"><i class="fa-solid fa-trash"></i></button>
                     </form>
                   </div>

@@ -1,6 +1,5 @@
 // Include Express module to set a server in this project
 const express = require('express')
-const mongoose = require('mongoose') // Include Mongoose to connect MongoDB
 const exphbs = require('express-handlebars') // Include Express-handlebars to use template engine
 const port = 3000 // Set server variable
 const bodyParser = require('body-parser') // Include the body parser to parse req body
