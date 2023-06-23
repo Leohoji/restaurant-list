@@ -1,5 +1,5 @@
 # Restaurant Foodie Website
-This is a user's favorite restaurant list project built on Node.js and Express.js, you can browse all the restaurants user's preference. Before doing the following steps, you need to have a MongoDB database MONGO_URI. 
+This is a user's favorite restaurant list project built on Node.js and Express.js, you can browse all the restaurants user's preference. 
 
 ![image](https://github.com/Leohoji/restaurant-list/blob/main/pictures/%E9%A4%90%E5%BB%B3%E6%B8%85%E5%96%AE-refactor.jpg)
 
@@ -47,12 +47,17 @@ npm install
 npm run seed
 ```
 
-5. Start the server
+5. Create ```.env``` file and copy this
+```
+MONGODB_URI=mongodb+srv://Alpha:camp@leocluster.r7bdedy.mongodb.net/todo-list?retryWrites=true&w=majority
+```
+
+7. Start the server
 ```
 npm run dev
 ```
 
-6. Copy the address on your website
+8. Copy the address on your website
 ```
 This project is running on http://localhost:3000
 ```
