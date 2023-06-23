@@ -49,7 +49,7 @@ npm run seed
 
 5. Create ```.env``` file and copy this
 ```
-MONGODB_URI=mongodb+srv://Alpha:camp@leocluster.r7bdedy.mongodb.net/todo-list?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://Alpha:camp@leocluster.r7bdedy.mongodb.net/Restaurant-list?retryWrites=true&w=majority
 ```
 
 7. Start the server
